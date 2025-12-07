@@ -2,7 +2,7 @@ import chess
 import pandas as pd
 import numpy as np
 
-# Funcion que me devuelve el estado del tablero a partir de los movimientos
+# Funció que retorna l'estat del tauler a partir dels moviments
 def board_after_n_moves(moves_str, n_moves=None):
     board = chess.Board()
     moves = moves_str.split()
@@ -12,9 +12,9 @@ def board_after_n_moves(moves_str, n_moves=None):
 
     for mv in moves:
         try:
-            board.push_san(mv)  # SAN = notación estándar que tú tienes
+            board.push_san(mv)  # SAN = notació estàndard
         except:
-            break  # por si algún movimiento está mal anotado
+            break  
 
     return board
 
@@ -28,7 +28,7 @@ piece_values = {
     chess.KING:   0
 }
 
-# Funcion que me devuelve las nuevas variables creadas. (nº de piezas, valor de las piezas)
+# Funció que retorna noves variables creades. (nº de peces, valor de las peces)
 def material_features(board):
     white_total = 0
     black_total = 0
@@ -57,13 +57,13 @@ CENTER_SQUARES = [
     chess.D4, chess.E4, chess.D5, chess.E5
 ]
 
-# Funcion que devuelve los valores para evaluar el control del centro del tablero
+# Funció que retorna els valors per mirar el control del centre del tauler
 def center_control(board):    
     white = 0
     black = 0
     
     for sq in CENTER_SQUARES: 
-        attackers_white = board.attackers(chess.WHITE, sq) # Devuelve los atacantes de una casilla específica por color
+        attackers_white = board.attackers(chess.WHITE, sq) 
         attackers_black = board.attackers(chess.BLACK, sq)
         
         if attackers_white:
@@ -103,15 +103,13 @@ PST = {
     chess.KING: np.zeros(64),
 }
 
-
-# Más robusto: generar tablero con turn=color y contar legal_moves
 def mobility_for_color(board, color):
     b2 = board.copy()
     b2.turn = color
     return b2.legal_moves.count()
 
 
-# PST score (suma simples)
+
 def pst_score(board, color):
     total = 0
     for sq, p in board.piece_map().items():
@@ -120,13 +118,13 @@ def pst_score(board, color):
             continue
         index = sq
         if p.color == chess.BLACK:
-            # invertir para perspectiva black
+           
             index = chess.square_mirror(index)
         total += val[index] * (1 if p.color==color else -1)
     return total if color==chess.WHITE else -total
 
 
-# función agregadora: nuevas features posicionales
+# afegim variables creades
 def positional_features(board):
     feats = {}
     feats.update({
@@ -135,12 +133,13 @@ def positional_features(board):
         "white_PST": pst_score(board, chess.WHITE),
         "black_PST": pst_score(board, chess.BLACK),
     })
-    # espacio relativo: casillas controladas en la mitad rival
+    # espai: casillas controlades en la meitat rival
     white_half = [sq for sq in chess.SQUARES if chess.square_rank(sq) >= 4]  # ranks 5-8 => 4..7
     black_half = [sq for sq in chess.SQUARES if chess.square_rank(sq) <= 3]  # ranks 1-4 => 0..3
     feats["white_space"] = sum(1 for sq in white_half if board.attackers(chess.WHITE, sq))
     feats["black_space"] = sum(1 for sq in black_half if board.attackers(chess.BLACK, sq))
     return feats
+
 
 def extract_features_from_moves(moves_str, n_moves=None):
     board = board_after_n_moves(moves_str, n_moves)
