@@ -1,15 +1,35 @@
+"""
+================================================================================
+3. Funcions de mètriques i visualització de models de classificació
+================================================================================
+
+Aquest mòdul agrupa totes les funcions utilitzades per avaluar i analitzar 
+el rendiment dels models del projecte de predicció del guanyador de partides 
+d’escacs. Inclou eines per calcular mètriques numèriques i per generar 
+visualitzacions estàndard en classificació binària.
+
+Funcionalitats principals:
+    - Informe complet amb accuracy, precision, recall i F1 (classification_report).
+    - Corba ROC i càlcul de l’AUC.
+    - Corba Precision–Recall i càlcul del Average Precision (AP).
+    - Matriu de confusió amb visualització integrada.
+    - Funció individual per dibuixar únicament la corba ROC.
+
+Aquest mòdul està pensat per ser importat i utilitzat en el notebook 
+`model_partida.ipynb` juntament amb els models entrenats.
+
+Autor: Naroa Sarrià Gil & Inés Gómez Carmona
+Projecte: Predicció del guanyador d’escacs (Lichess)
+UAB - Aprenentatge Computacional (2025)
+"""
+
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 from matplotlib.gridspec import GridSpec
 from sklearn.metrics import accuracy_score, roc_curve,auc, precision_recall_curve, classification_report, confusion_matrix, ConfusionMatrixDisplay, average_precision_score
 
 sns.set_style('whitegrid')
-
-# Metric selection i Suite de Funcions
-""" Selecció de la millor mètrica pel problema
-    Visualització de ROC/AUC per model base"""
-# Tenim un dataset molt balancejat per tant utilitzarem com a mètrica principal de referència l'accuracy i 
-# visualitzarem la ROC curve amb el AUC
 
 def metriques(model,X_test,y_test):
     y_pred = model.predict(X_test)
