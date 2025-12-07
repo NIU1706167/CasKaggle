@@ -13,10 +13,10 @@ L’objectiu és **predir quin jugador guanyarà (blanques = 1, negres = 0)** ut
 ├── games_preprocessed.csv 
 ├── 1_EDA.ipynb 
 ├── 2_preprocessing.ipynb 
-├── 2_1_funcions.py 
-├── 3_metric_selection.py
-├── 4_model_previ.ipynb 
-├── 4_model_partida.ipynb
+├── funcions.py 
+├── metric_selection.py
+├── 3_model_previ.ipynb 
+├── 3_model_partida.ipynb
 └── README.md
 
 ---
