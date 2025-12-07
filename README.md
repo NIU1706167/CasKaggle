@@ -9,6 +9,7 @@ L’objectiu és **predir quin jugador guanyarà (blanques = 1, negres = 0)** ut
 
 ## Estructura del repositori
 ├── games.csv 
+├── games_EDA.csv 
 ├── games_preprocessed.csv 
 ├── 1_EDA.ipynb 
 ├── 2_preprocessing.ipynb 
