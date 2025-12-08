@@ -19,6 +19,11 @@ L’objectiu és **predir quin jugador guanyarà (blanques = 1, negres = 0)** ut
 ├── 3_model_partida.ipynb
 └── README.md
 
+Dins dels 4 notebooks en format Jupyter i dels dos scrpits en Python tenim el següent contingut:
+- 1_EDA.ipnb : Anàlisis exploratori de les dades. S'analitza el conjunt de dades, on l'objectiu és entendre les variables que tenim.
+- 2_preprocessing.ipnyb : en aquest notebook fem la preparació de les dades que utilitzarem. Creem noves variables i decidim quines utilitzarem en els models.
+- metric_selection.py: script de python en el qual tenim les funcions que utilitzarem amb les mètriques, juntament 
+
 ---
 
 ## Autores
